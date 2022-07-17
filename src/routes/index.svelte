@@ -1,6 +1,12 @@
 <script lang="ts">
-  import Toast from '$lib/Toast.svelte';
   import ToastProvider from '$lib/ToastProvider.svelte';
+  import { toast } from '$lib/toast';
 </script>
 
-<ToastProvider>Hello world</ToastProvider>
+<ToastProvider>
+  <button
+    on:click={() => {
+      toast('Hello');
+    }}>Toast</button
+  >
+</ToastProvider>

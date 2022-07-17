@@ -9,7 +9,7 @@ interface Options {
   duration?: number;
 }
 
-const toast = (message: string, options: Options) => {
+const toast = (message: string, options?: Options) => {
   const prevToasts = get(toasts);
 
   const toastId = crypto.randomUUID();
@@ -18,10 +18,10 @@ const toast = (message: string, options: Options) => {
     ...prevToasts,
     {
       id: toastId,
-      type: options.type || 'normal',
-      title: options.title,
+      type: options?.type || 'normal',
+      title: options?.title,
       message: message,
-      duration: options.duration || 3000
+      duration: options?.duration || 3000
     }
   ]);
 };
