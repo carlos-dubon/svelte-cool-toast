@@ -25,6 +25,7 @@
 
 {#if visible}
   <div
+    class="toast-container"
     in:fly={{ x: 200, duration: 500 }}
     out:fade
     on:mouseenter={() => (isHovered = true)}

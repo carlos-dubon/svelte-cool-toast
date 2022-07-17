@@ -1,6 +1,7 @@
 <script lang="ts">
   import ToastProvider from '$lib/ToastProvider.svelte';
   import { toast } from '$lib/toast';
+  import '$lib/css/theme.css';
 </script>
 
 <ToastProvider>

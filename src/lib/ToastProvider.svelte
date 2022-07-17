@@ -40,10 +40,11 @@
     padding-left: 1.25rem;
     padding-right: 1.25rem;
     width: 100%;
-    @media (min-width: 640px) {
-      .toasts-container {
-        width: fit-content;
-      }
+  }
+
+  @media (min-width: 640px) {
+    .toasts-container {
+      width: fit-content;
     }
   }
 </style>
