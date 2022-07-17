@@ -7,7 +7,9 @@
 <ToastProvider>
   <button
     on:click={() => {
-      toast('Hello');
+      toast('Hello', {
+        title: 'Title'
+      });
     }}>Toast</button
   >
 </ToastProvider>
