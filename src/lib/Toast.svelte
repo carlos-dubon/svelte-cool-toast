@@ -1,4 +1,6 @@
 <script lang="ts">
+  import CloseIcon from './icons/Close.svelte';
+
   import { onMount } from 'svelte';
   import { wait } from './helpers/wait';
   import { fade, fly } from 'svelte/transition';
@@ -47,12 +49,14 @@
       </p>
     </div>
     <div
-      class="toast-remove"
+      class="toast-dismiss"
       on:click={() => {
         visible = false;
       }}
     >
-      x
+      <div class="toast-dismiss-button">
+        <CloseIcon />
+      </div>
     </div>
   </div>
 {/if}
@@ -101,9 +105,23 @@
     align-items: center;
   }
 
-  .toast-remove {
+  .toast-dismiss {
     cursor: pointer;
     width: fit-content;
     height: fit-content;
+  }
+
+  .toast-dismiss .toast-dismiss-button {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background-color: #f4f4f4;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .toast-dismiss .toast-dismiss-button:hover {
+    background-color: #f0f0f0;
   }
 </style>

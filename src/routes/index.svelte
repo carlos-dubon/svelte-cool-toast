@@ -8,6 +8,7 @@
   <button
     on:click={() => {
       toast('Hello', {
+        duration: 10000,
         title: 'Title'
       });
     }}>Toast</button
