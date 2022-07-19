@@ -8,9 +8,43 @@
   <button
     on:click={() => {
       toast('Hello', {
-        duration: 10000,
         title: 'Title'
       });
-    }}>Toast</button
+    }}
   >
+    Normal toast with title
+  </button>
+
+  <button
+    on:click={() => {
+      toast('Hello', {
+        title: 'Title',
+        type: 'success'
+      });
+    }}
+  >
+    Type success
+  </button>
+
+  <button
+    on:click={() => {
+      toast('Hello', {
+        title: 'Title',
+        type: 'error'
+      });
+    }}
+  >
+    Type error
+  </button>
+
+  <button
+    on:click={() => {
+      toast('Hello', {
+        title: 'Title',
+        type: 'warning'
+      });
+    }}
+  >
+    Type warning
+  </button>
 </ToastProvider>

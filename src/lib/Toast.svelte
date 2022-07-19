@@ -1,5 +1,9 @@
 <script lang="ts">
   import CloseIcon from './icons/Close.svelte';
+  import CheckmarkIcon from './icons/Checkmark.svelte';
+  import InformationIcon from './icons/Information.svelte';
+  import BanIcon from './icons/Ban.svelte';
+  import WarningIcon from './icons/Warning.svelte';
 
   import { onMount } from 'svelte';
   import { wait } from './helpers/wait';
@@ -40,6 +44,17 @@
       }
     }}
   >
+    <div class="toast-icon">
+      {#if type == 'normal'}
+        <InformationIcon />
+      {:else if type == 'success'}
+        <CheckmarkIcon />
+      {:else if type == 'error'}
+        <BanIcon />
+      {:else if type == 'warning'}
+        <WarningIcon />
+      {/if}
+    </div>
     <div class="toast-content">
       {#if title}
         <p class="toast-title">{title}</p>
@@ -79,6 +94,13 @@
     .toast-container {
       width: 18rem;
     }
+  }
+
+  .toast-icon {
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
   }
 
   .toast-content {
