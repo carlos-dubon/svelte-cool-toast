@@ -6,6 +6,7 @@
   import WarningIcon from './icons/Warning.svelte';
 
   import { onMount } from 'svelte';
+  import type { SvelteComponent } from 'svelte';
   import { wait } from './helpers/wait';
   import { fade, fly } from 'svelte/transition';
 
@@ -15,6 +16,9 @@
   export let message = 'Toast example';
   export let duration = 3000;
   export let type: ToastType = 'normal';
+
+  export let contentComponent: typeof SvelteComponent | undefined;
+  export let dismissComponent: typeof SvelteComponent | undefined;
 
   let visible = true;
 
@@ -27,6 +31,10 @@
       visible = false;
     }
   });
+
+  const dismiss = () => {
+    visible = false;
+  };
 </script>
 
 {#if visible}
@@ -44,34 +52,49 @@
       }
     }}
   >
-    <div class="toast-icon">
-      {#if type == 'normal'}
-        <InformationIcon />
-      {:else if type == 'success'}
-        <CheckmarkIcon />
-      {:else if type == 'error'}
-        <BanIcon />
-      {:else if type == 'warning'}
-        <WarningIcon />
-      {/if}
-    </div>
-    <div class="toast-content">
-      {#if title}
-        <p class="toast-title">{title}</p>
-      {/if}
-      <p class="toast-message">
-        {message}
-      </p>
-    </div>
-    <div
-      class="toast-dismiss"
-      on:click={() => {
-        visible = false;
-      }}
-    >
-      <div class="toast-dismiss-button">
-        <CloseIcon />
+    {#if contentComponent}
+      <div class="toast-custom-content">
+        <svelte:component
+          this={contentComponent}
+          props={{
+            title,
+            message,
+            type
+          }}
+        />
       </div>
+    {:else}
+      <div class="toast-icon">
+        {#if type == 'normal'}
+          <InformationIcon />
+        {:else if type == 'success'}
+          <CheckmarkIcon />
+        {:else if type == 'error'}
+          <BanIcon />
+        {:else if type == 'warning'}
+          <WarningIcon />
+        {/if}
+      </div>
+      <div class="toast-content">
+        {#if title}
+          <p class="toast-title">{title}</p>
+        {/if}
+        <p class="toast-message">
+          {message}
+        </p>
+      </div>
+    {/if}
+
+    <div class="toast-dismiss">
+      {#if dismissComponent}
+        <div on:click={dismiss}>
+          <svelte:component this={dismissComponent} />
+        </div>
+      {:else}
+        <div class="toast-dismiss-button" on:click={dismiss}>
+          <CloseIcon />
+        </div>
+      {/if}
     </div>
   </div>
 {/if}
@@ -94,6 +117,10 @@
     height: 24px;
     display: grid;
     place-items: center;
+  }
+
+  .toast-custom-content {
+    width: 100%;
   }
 
   .toast-content {

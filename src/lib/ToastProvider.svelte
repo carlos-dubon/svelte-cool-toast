@@ -1,6 +1,10 @@
 <script lang="ts">
   import Toast from './Toast.svelte';
   import { toasts } from './store';
+  import type { SvelteComponent } from 'svelte';
+
+  export let contentComponent: typeof SvelteComponent | undefined = undefined;
+  export let dismissComponent: typeof SvelteComponent | undefined = undefined;
 </script>
 
 <slot />
@@ -9,6 +13,8 @@
   <div class="toasts-container">
     {#each $toasts as toast}
       <Toast
+        {contentComponent}
+        {dismissComponent}
         title={toast.title}
         message={toast.message}
         type={toast.type}
