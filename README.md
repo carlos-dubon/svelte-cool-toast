@@ -1,38 +1,7 @@
-# create-svelte
+![svelte-cool-toast](https://socialify.git.ci/carlos-dubon/svelte-cool-toast/image?description=1&font=Raleway&forks=1&issues=1&language=1&logo=https%3A%2F%2Fraw.githubusercontent.com%2Fcarlos-dubon%2Fsvelte-cool-toast%2Fc2af101829d66d624301a972edc63276db362268%2F.github%2Freadme%2Flogo.svg&name=1&owner=1&pattern=Plus&stargazers=1&theme=Light)
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm init svelte
-
-# create a new project in my-app
-npm init svelte my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+<p align="center">
+<img src="https://img.shields.io/npm/dt/svelte-cool-toast" alt="NPM downloads">
+<img src="https://img.shields.io/bundlephobia/minzip/svelte-cool-toast" alt="Package size">
+<img src="https://img.shields.io/github/license/carlos-dubon/svelte-cool-toast" alt="License">
+</p>
