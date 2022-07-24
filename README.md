@@ -5,3 +5,42 @@
 <img src="https://img.shields.io/bundlephobia/minzip/svelte-cool-toast" alt="Package size">
 <img src="https://img.shields.io/github/license/carlos-dubon/svelte-cool-toast" alt="License">
 </p>
+
+## ✨ Features
+
+- 👌 Zero-dependency
+- 🪶 Lightweight
+- ✏️ Custom components
+- 🎨 Easily themable
+- 📱 Mobile friendly
+
+## ☀️ License
+
+[MIT](./LICENSE)
+
+## 📦 Installation
+
+```
+$ npm install svelte-cool-toast
+```
+
+## 🔨 Usage
+
+Wrap your app with the `ToastProvider` component and then use the `toast` helper to create a new notification.
+
+```Svelte
+<script lang="ts">
+  import { ToastProvider, toast } from 'svelte-cool-toast';
+</script>
+
+<ToastProvider>
+  <button
+    on:click={() => {
+      toast("Here's your toast");
+    }}
+  >
+    Make me a toast
+  </button>
+</ToastProvider>
+
+```

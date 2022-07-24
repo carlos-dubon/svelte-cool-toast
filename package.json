@@ -1,6 +1,14 @@
 {
   "name": "svelte-cool-toast",
-  "version": "1.0.1",
+  "description": "😎 Cool toast notifications for Svelte",
+  "keywords": [
+    "toast",
+    "notifications",
+    "svelte",
+    "svelte-cool-toast",
+    "svelte-toast"
+  ],
+  "version": "1.0.2",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
@@ -33,5 +41,14 @@
   "type": "module",
   "exports": {
     ".": "./index.js"
+  },
+  "license": "MIT",
+  "author": "carlos-dubon",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carlos-dubon/svelte-cool-toast.git"
+  },
+  "bugs": {
+    "url": "https://github.com/carlos-dubon/svelte-cool-toast/issues"
   }
 }
