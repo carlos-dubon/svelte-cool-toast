@@ -105,7 +105,7 @@ If you want to render a custom content component simply pass the `contentCompone
 
 ```
 
-Similarly if you wan't to change the default dismiss button you can pass your own `dismissComponent` prop to the `ToastProvider`.
+Similarly if you want to change the default dismiss button you can pass your own `dismissComponent` prop to the `ToastProvider`.
 
 ```Svelte
 // MyDismissButton.svelte
@@ -139,7 +139,7 @@ Similarly if you wan't to change the default dismiss button you can pass your ow
 
 ## 🎨 Theming
 
-You can use your own styles for the toast container by targeting the `.toast-conatiner` class.
+You can use your own styles for the toast container by targeting the `.toast-container` class.
 
 ```Svelte
 // App.svelte

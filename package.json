@@ -8,7 +8,7 @@
     "svelte-cool-toast",
     "svelte-toast"
   ],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
@@ -50,5 +50,6 @@
   },
   "bugs": {
     "url": "https://github.com/carlos-dubon/svelte-cool-toast/issues"
-  }
+  },
+  "homepage": "https://svelte.dev/repl/46c3c3c8943e4752a380ce019fb99739?version=3.49.0"
 }
