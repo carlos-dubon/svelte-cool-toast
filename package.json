@@ -8,7 +8,7 @@
     "svelte-cool-toast",
     "svelte-toast"
   ],
-  "version": "1.0.3",
+  "version": "1.0.4",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",

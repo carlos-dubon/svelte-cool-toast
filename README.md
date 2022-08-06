@@ -1,21 +1,39 @@
-<p align="center">
-  <img src=".github/readme/banner.png" alt="Banner">
+<h1 align="center">svelte-cool-toast 😎</h1>
+
+<p align="center" style="font-size: 1.2rem">
+  Cool toast notifications for Svelte.
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/github/stars/carlos-dubon/svelte-cool-toast?style=plastic" alt="Stars">
-  <img src="https://img.shields.io/github/forks/carlos-dubon/svelte-cool-toast?style=plastic" alt="Forks">
-  <img src="https://img.shields.io/github/issues/carlos-dubon/svelte-cool-toast?style=plastic" alt="Issues">
-<img src="https://img.shields.io/npm/dt/svelte-cool-toast?style=plastic" alt="NPM downloads">
-<img src="https://img.shields.io/bundlephobia/minzip/svelte-cool-toast?style=plastic" alt="Package size">
-<img src="https://img.shields.io/github/license/carlos-dubon/svelte-cool-toast?style=plastic" alt="License">
-</p>
-
-<h3 align="center">
-   <a href="https://svelte.dev/repl/46c3c3c8943e4752a380ce019fb99739?version=3.49.0" >
- REPL Demo
+<div align="center">
+  <a
+    href="https://svelte.dev/repl/46c3c3c8943e4752a380ce019fb99739?version=3.49.0"
+  >
+    <b style="font-size: 1.2rem">REPL Demo</b>
   </a>
-</h3>
+</div>
+
+<hr />
+
+<img
+  src="https://img.shields.io/github/stars/carlos-dubon/svelte-cool-toast?style=flat-square"
+  alt="Stars"
+/>
+<img
+  src="https://img.shields.io/github/forks/carlos-dubon/svelte-cool-toast?style=flat-square"
+  alt="Forks"
+/>
+<img
+  src="https://img.shields.io/github/issues/carlos-dubon/svelte-cool-toast?style=flat-square"
+  alt="Issues"
+/>
+<img
+  src="https://img.shields.io/npm/dt/svelte-cool-toast?style=flat-square"
+  alt="NPM downloads"
+/>
+<img
+  src="https://img.shields.io/github/license/carlos-dubon/svelte-cool-toast?style=flat-square"
+  alt="License"
+/>
 
 ## ✨ Features
 
@@ -70,7 +88,7 @@ Wrap your app with the `ToastProvider` component and then use the `toast` helper
 If you want to render a custom content component simply pass the `contentComponent` prop to the `ToastProvider`.
 
 ```Svelte
-// MyContentComponent.svelte
+<!-- MyContentComponent.svelte -->
 
 <script lang="ts">
   import type { ToastType } from 'svelte-cool-toast';
@@ -89,7 +107,7 @@ If you want to render a custom content component simply pass the `contentCompone
 ```
 
 ```Svelte
-// App.svelte
+<!-- App.svelte -->
 
 <script>
   import { ToastProvider, toast } from 'svelte-cool-toast';
@@ -113,7 +131,7 @@ If you want to render a custom content component simply pass the `contentCompone
 Similarly if you want to change the default dismiss button you can pass your own `dismissComponent` prop to the `ToastProvider`.
 
 ```Svelte
-// MyDismissButton.svelte
+<!-- MyDismissButton.svelte -->
 
 <div>
   <p>Close</p>
@@ -122,7 +140,7 @@ Similarly if you want to change the default dismiss button you can pass your own
 ```
 
 ```Svelte
-// App.svelte
+<!-- App.svelte -->
 
 <script>
   import { ToastProvider, toast } from 'svelte-cool-toast';
@@ -147,7 +165,7 @@ Similarly if you want to change the default dismiss button you can pass your own
 You can use your own styles for the toast container by targeting the `.toast-container` class.
 
 ```Svelte
-// App.svelte
+<!-- App.svelte -->
 
 <script>
   import { ToastProvider, toast } from 'svelte-cool-toast';
