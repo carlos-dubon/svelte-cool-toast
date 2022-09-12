@@ -32,6 +32,7 @@
     width: 100%;
     display: flex;
     justify-content: end;
+    pointer-events: none;
     @media (min-width: 640px) {
       .wrapper {
         right: 1.25rem;
@@ -40,15 +41,16 @@
   }
 
   .toasts-container {
+    pointer-events: all;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.6rem;
     padding-left: 1.25rem;
     padding-right: 1.25rem;
     width: 100%;
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 570px) {
     .toasts-container {
       width: fit-content;
     }

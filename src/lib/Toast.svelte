@@ -8,13 +8,12 @@
   import { onMount } from 'svelte';
   import type { SvelteComponent } from 'svelte';
   import { wait } from './helpers/wait';
-  import { fade, fly } from 'svelte/transition';
 
   import type { ToastType } from './toast';
 
   export let title = '';
   export let message = 'Toast example';
-  export let duration = 3000;
+  export let duration = 2000;
   export let type: ToastType = 'normal';
 
   export let contentComponent: typeof SvelteComponent | undefined;
@@ -35,80 +34,94 @@
   const dismiss = () => {
     visible = false;
   };
+
+  $: visible, console.log(visible);
 </script>
 
-{#if visible}
-  <div
-    class="toast-container"
-    in:fly={{ x: 200, duration: 500 }}
-    out:fade
-    on:mouseenter={() => (isHovered = true)}
-    on:mouseleave={async () => {
-      isHovered = false;
+<div
+  class={`toast-container ${visible ? 'in' : 'out'}`}
+  on:mouseenter={() => (isHovered = true)}
+  on:mouseleave={async () => {
+    isHovered = false;
 
-      await wait(500);
-      if (!isHovered) {
-        visible = false;
-      }
-    }}
-  >
-    {#if contentComponent}
-      <div class="toast-custom-content">
-        <svelte:component
-          this={contentComponent}
-          props={{
-            title,
-            message,
-            type
-          }}
-        />
-      </div>
-    {:else}
-      <div class="toast-icon">
-        {#if type == 'normal'}
-          <InformationIcon />
-        {:else if type == 'success'}
-          <CheckmarkIcon />
-        {:else if type == 'error'}
-          <BanIcon />
-        {:else if type == 'warning'}
-          <WarningIcon />
-        {/if}
-      </div>
-      <div class="toast-content">
-        {#if title}
-          <p class="toast-title">{title}</p>
-        {/if}
-        <p class="toast-message">
-          {message}
-        </p>
-      </div>
-    {/if}
-
-    <div class="toast-dismiss">
-      {#if dismissComponent}
-        <div on:click={dismiss}>
-          <svelte:component this={dismissComponent} />
-        </div>
-      {:else}
-        <div class="toast-dismiss-button" on:click={dismiss}>
-          <CloseIcon />
-        </div>
+    await wait(400);
+    if (!isHovered) {
+      visible = false;
+    }
+  }}
+>
+  {#if contentComponent}
+    <div class="toast-custom-content">
+      <svelte:component
+        this={contentComponent}
+        props={{
+          title,
+          message,
+          type
+        }}
+      />
+    </div>
+  {:else}
+    <div class="toast-icon">
+      {#if type == 'normal'}
+        <InformationIcon />
+      {:else if type == 'success'}
+        <CheckmarkIcon />
+      {:else if type == 'error'}
+        <BanIcon />
+      {:else if type == 'warning'}
+        <WarningIcon />
       {/if}
     </div>
+    <div class="toast-content">
+      {#if title}
+        <p class="toast-title">{title}</p>
+      {/if}
+      <p class="toast-message">
+        {message}
+      </p>
+    </div>
+  {/if}
+
+  <div class="toast-dismiss">
+    {#if dismissComponent}
+      <div on:click={dismiss}>
+        <svelte:component this={dismissComponent} />
+      </div>
+    {:else}
+      <div class="toast-dismiss-button" on:click={dismiss}>
+        <CloseIcon />
+      </div>
+    {/if}
   </div>
-{/if}
+</div>
 
 <style>
   .toast-container {
     width: 100%;
-    display: flex;
     gap: 0.5rem;
+  }
+
+  .in {
+    display: flex;
+    animation-name: in;
+    animation-duration: 400ms;
+    animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .out {
+    display: flex;
+    position: relative;
+    z-index: -1;
+    animation-name: out;
+    animation-duration: 350ms;
+    animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    animation-fill-mode: forwards;
   }
 
   @media (min-width: 640px) {
     .toast-container {
-      width: 18rem;
+      width: 16rem;
     }
   }
 
@@ -151,5 +164,31 @@
 
   .toast-dismiss .toast-dismiss-button:hover {
     background-color: #f0f0f0;
+  }
+
+  @keyframes in {
+    0% {
+      opacity: 0;
+      transform: translateY(100%) scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0px) scale(1);
+    }
+  }
+
+  @keyframes out {
+    from {
+      opacity: 1;
+      transform: translateY(0px) scale(1);
+      visibility: visible;
+      pointer-events: all;
+    }
+    to {
+      opacity: 0;
+      transform: translateY(110%) scale(0.6);
+      visibility: hidden;
+      pointer-events: none;
+    }
   }
 </style>

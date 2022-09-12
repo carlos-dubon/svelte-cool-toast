@@ -18,7 +18,6 @@
       on:click={() => {
         toast('Successfully toasted!', {
           title: 'Success',
-          duration: 5000,
           type: 'success'
         });
       }}
