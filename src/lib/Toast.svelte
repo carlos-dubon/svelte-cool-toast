@@ -34,8 +34,6 @@
   const dismiss = () => {
     visible = false;
   };
-
-  $: visible, console.log(visible);
 </script>
 
 <div
