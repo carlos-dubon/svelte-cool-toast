@@ -67,7 +67,7 @@ Wrap your app with the `ToastProvider` component and then use the `toast` helper
   import "svelte-cool-toast/css/theme.css";
 </script>
 
-<ToastProvider>
+<ToastProvider placement="bottom-center">
   <button
     on:click={() => {
       toast('Successfully toasted!', {
