@@ -45,6 +45,7 @@
 
   onMount(() => {
     el.addEventListener('transitionend', () => {
+      if (isHovered) return;
       toasts.set($toasts.filter((t) => t.id != id));
     });
   });
