@@ -52,6 +52,12 @@
     justify-content: start;
   }
 
+  .toast-bottom-center {
+    bottom: 0;
+    right: 0;
+    justify-content: center;
+  }
+
   .toast-top-left {
     top: 0;
     left: 0;
@@ -62,6 +68,12 @@
     top: 0;
     left: 0;
     justify-content: end;
+  }
+
+  .toast-top-center {
+    top: 0;
+    left: 0;
+    justify-content: center;
   }
 
   .toasts-container {
