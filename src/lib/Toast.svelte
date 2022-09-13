@@ -132,7 +132,7 @@
 
   @media (min-width: 640px) {
     .toast-container {
-      width: 16rem;
+      width: 16.8rem;
     }
   }
 
