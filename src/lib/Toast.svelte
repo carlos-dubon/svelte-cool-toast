@@ -136,7 +136,7 @@
     position: relative;
     z-index: -1;
     animation-name: out-bottom;
-    animation-duration: 350ms;
+    animation-duration: 300ms;
     animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
     animation-fill-mode: forwards;
   }
@@ -153,7 +153,7 @@
     position: relative;
     z-index: -1;
     animation-name: out-top;
-    animation-duration: 350ms;
+    animation-duration: 300ms;
     animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
     animation-fill-mode: forwards;
   }
