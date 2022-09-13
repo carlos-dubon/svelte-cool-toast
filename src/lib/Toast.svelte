@@ -10,7 +10,9 @@
   import { wait } from './helpers/wait';
 
   import type { ToastType } from './toast';
+  import { toasts, placement } from './store';
 
+  export let id = '';
   export let title = '';
   export let message = 'Toast example';
   export let duration = 2000;
@@ -18,6 +20,10 @@
 
   export let contentComponent: typeof SvelteComponent | undefined;
   export let dismissComponent: typeof SvelteComponent | undefined;
+
+  let isPlacementBottom = true;
+
+  $placement.includes('bottom') ? (isPlacementBottom = true) : (isPlacementBottom = false);
 
   let visible = true;
 
@@ -35,76 +41,81 @@
     visible = false;
   };
 
-  let removeNode = false;
   let el: HTMLDivElement;
 
   onMount(() => {
     el.addEventListener('transitionend', () => {
-      removeNode = true;
+      toasts.set($toasts.filter((t) => t.id != id));
     });
   });
 </script>
 
-{#if !removeNode}
-  <div
-    class={`toast-container ${visible ? 'in' : 'out'}`}
-    on:mouseenter={() => (isHovered = true)}
-    on:mouseleave={async () => {
-      isHovered = false;
+<div
+  class={`toast-container ${
+    visible
+      ? isPlacementBottom
+        ? 'toast-in-bottom'
+        : 'toast-in-top'
+      : isPlacementBottom
+      ? 'toast-out-bottom'
+      : 'toast-out-top'
+  }`}
+  on:mouseenter={() => (isHovered = true)}
+  on:mouseleave={async () => {
+    isHovered = false;
 
-      await wait(400);
-      if (!isHovered) {
-        visible = false;
-      }
-    }}
-    bind:this={el}
-  >
-    {#if contentComponent}
-      <div class="toast-custom-content">
-        <svelte:component
-          this={contentComponent}
-          props={{
-            title,
-            message,
-            type
-          }}
-        />
-      </div>
-    {:else}
-      <div class="toast-icon">
-        {#if type == 'normal'}
-          <InformationIcon />
-        {:else if type == 'success'}
-          <CheckmarkIcon />
-        {:else if type == 'error'}
-          <BanIcon />
-        {:else if type == 'warning'}
-          <WarningIcon />
-        {/if}
-      </div>
-      <div class="toast-content">
-        {#if title}
-          <p class="toast-title">{title}</p>
-        {/if}
-        <p class="toast-message">
-          {message}
-        </p>
-      </div>
-    {/if}
-
-    <div class="toast-dismiss">
-      {#if dismissComponent}
-        <div on:click={dismiss}>
-          <svelte:component this={dismissComponent} />
-        </div>
-      {:else}
-        <div class="toast-dismiss-button" on:click={dismiss}>
-          <CloseIcon />
-        </div>
+    await wait(400);
+    if (!isHovered) {
+      visible = false;
+    }
+  }}
+  bind:this={el}
+>
+  {#if contentComponent}
+    <div class="toast-custom-content">
+      <svelte:component
+        this={contentComponent}
+        props={{
+          title,
+          message,
+          type
+        }}
+      />
+    </div>
+  {:else}
+    <div class="toast-icon">
+      {#if type == 'normal'}
+        <InformationIcon />
+      {:else if type == 'success'}
+        <CheckmarkIcon />
+      {:else if type == 'error'}
+        <BanIcon />
+      {:else if type == 'warning'}
+        <WarningIcon />
       {/if}
     </div>
+    <div class="toast-content">
+      {#if title}
+        <p class="toast-title">{title}</p>
+      {/if}
+      <p class="toast-message">
+        {message}
+      </p>
+    </div>
+  {/if}
+
+  <div class="toast-dismiss">
+    {#if dismissComponent}
+      <div on:click={dismiss}>
+        <svelte:component this={dismissComponent} />
+      </div>
+    {:else}
+      <div class="toast-dismiss-button" on:click={dismiss}>
+        <CloseIcon />
+      </div>
+    {/if}
   </div>
-{/if}
+</div>
 
 <style>
   .toast-container {
@@ -113,18 +124,35 @@
     gap: 0.5rem;
   }
 
-  .in {
+  .toast-in-bottom {
     display: flex;
-    animation-name: in;
+    animation-name: in-bottom;
     animation-duration: 400ms;
     animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
   }
 
-  .out {
+  .toast-out-bottom {
     display: flex;
     position: relative;
     z-index: -1;
-    animation-name: out;
+    animation-name: out-bottom;
+    animation-duration: 350ms;
+    animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    animation-fill-mode: forwards;
+  }
+
+  .toast-in-top {
+    display: flex;
+    animation-name: in-top;
+    animation-duration: 400ms;
+    animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .toast-out-top {
+    display: flex;
+    position: relative;
+    z-index: -1;
+    animation-name: out-top;
     animation-duration: 350ms;
     animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
     animation-fill-mode: forwards;
@@ -177,7 +205,7 @@
     background-color: #f0f0f0;
   }
 
-  @keyframes in {
+  @keyframes in-bottom {
     0% {
       opacity: 0;
       transform: translateY(100%) scale(0.8);
@@ -188,7 +216,7 @@
     }
   }
 
-  @keyframes out {
+  @keyframes out-bottom {
     from {
       opacity: 1;
       transform: translateY(0px) scale(1);
@@ -198,6 +226,32 @@
     to {
       opacity: 0;
       transform: translateY(110%) scale(0.6);
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
+
+  @keyframes in-top {
+    0% {
+      opacity: 0;
+      transform: translateY(-100%) scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0px) scale(1);
+    }
+  }
+
+  @keyframes out-top {
+    from {
+      opacity: 1;
+      transform: translateY(0px) scale(1);
+      visibility: visible;
+      pointer-events: all;
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-110%) scale(0.6);
       visibility: hidden;
       pointer-events: none;
     }
