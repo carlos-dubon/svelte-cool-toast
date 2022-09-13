@@ -34,68 +34,81 @@
   const dismiss = () => {
     visible = false;
   };
+
+  let removeNode = false;
+  let el: HTMLDivElement;
+
+  onMount(() => {
+    el.addEventListener('transitionend', () => {
+      removeNode = true;
+    });
+  });
 </script>
 
-<div
-  class={`toast-container ${visible ? 'in' : 'out'}`}
-  on:mouseenter={() => (isHovered = true)}
-  on:mouseleave={async () => {
-    isHovered = false;
+{#if !removeNode}
+  <div
+    class={`toast-container ${visible ? 'in' : 'out'}`}
+    on:mouseenter={() => (isHovered = true)}
+    on:mouseleave={async () => {
+      isHovered = false;
 
-    await wait(400);
-    if (!isHovered) {
-      visible = false;
-    }
-  }}
->
-  {#if contentComponent}
-    <div class="toast-custom-content">
-      <svelte:component
-        this={contentComponent}
-        props={{
-          title,
-          message,
-          type
-        }}
-      />
-    </div>
-  {:else}
-    <div class="toast-icon">
-      {#if type == 'normal'}
-        <InformationIcon />
-      {:else if type == 'success'}
-        <CheckmarkIcon />
-      {:else if type == 'error'}
-        <BanIcon />
-      {:else if type == 'warning'}
-        <WarningIcon />
-      {/if}
-    </div>
-    <div class="toast-content">
-      {#if title}
-        <p class="toast-title">{title}</p>
-      {/if}
-      <p class="toast-message">
-        {message}
-      </p>
-    </div>
-  {/if}
-
-  <div class="toast-dismiss">
-    {#if dismissComponent}
-      <div on:click={dismiss}>
-        <svelte:component this={dismissComponent} />
+      await wait(400);
+      if (!isHovered) {
+        visible = false;
+      }
+    }}
+    bind:this={el}
+  >
+    {#if contentComponent}
+      <div class="toast-custom-content">
+        <svelte:component
+          this={contentComponent}
+          props={{
+            title,
+            message,
+            type
+          }}
+        />
       </div>
     {:else}
-      <div class="toast-dismiss-button" on:click={dismiss}>
-        <CloseIcon />
+      <div class="toast-icon">
+        {#if type == 'normal'}
+          <InformationIcon />
+        {:else if type == 'success'}
+          <CheckmarkIcon />
+        {:else if type == 'error'}
+          <BanIcon />
+        {:else if type == 'warning'}
+          <WarningIcon />
+        {/if}
+      </div>
+      <div class="toast-content">
+        {#if title}
+          <p class="toast-title">{title}</p>
+        {/if}
+        <p class="toast-message">
+          {message}
+        </p>
       </div>
     {/if}
+
+    <div class="toast-dismiss">
+      {#if dismissComponent}
+        <div on:click={dismiss}>
+          <svelte:component this={dismissComponent} />
+        </div>
+      {:else}
+        <div class="toast-dismiss-button" on:click={dismiss}>
+          <CloseIcon />
+        </div>
+      {/if}
+    </div>
   </div>
-</div>
+{/if}
 
 <style>
   .toast-container {
+    box-sizing: border-box;
     width: 100%;
     gap: 0.5rem;
   }

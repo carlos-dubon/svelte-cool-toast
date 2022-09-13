@@ -27,17 +27,13 @@
 <style>
   .wrapper {
     position: fixed;
-    bottom: 1.25rem;
+    bottom: 0;
+    right: 0;
     z-index: 100;
     width: 100%;
     display: flex;
     justify-content: end;
     pointer-events: none;
-    @media (min-width: 640px) {
-      .wrapper {
-        right: 1.25rem;
-      }
-    }
   }
 
   .toasts-container {
@@ -45,8 +41,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding: 0 1.25rem 1.25rem 1.25rem;
     width: 100%;
   }
 
