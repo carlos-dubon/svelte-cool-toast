@@ -4,7 +4,7 @@
   import '$lib/css/theme.css';
 </script>
 
-<ToastProvider>
+<ToastProvider placement="bottom-right">
   <div class="container">
     <button
       on:click={() => {
