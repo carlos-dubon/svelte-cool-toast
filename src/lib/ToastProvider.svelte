@@ -16,7 +16,7 @@
 <slot />
 
 <div class={`wrapper toast-${placement}`}>
-  <div class="toasts-container">
+  <div class={`toasts-container ${$toasts.length && 'toast-add-padding'}`}>
     {#each $toasts as toast (toast.id)}
       <Toast
         id={toast.id}
@@ -81,8 +81,11 @@
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
-    padding: 1.25rem;
     width: 100%;
+  }
+
+  .toast-add-padding {
+    padding: 1.25rem;
   }
 
   @media (min-width: 570px) {
