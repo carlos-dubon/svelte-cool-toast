@@ -1,5 +1,5 @@
 import { writable, type Writable } from 'svelte/store';
-import type { ToastType } from './toast';
+import type { ToastType, UsePromise } from './toast';
 export type Placement =
   | 'top-left'
   | 'top-center'
@@ -14,6 +14,7 @@ export interface Toast {
   message: string;
   type: ToastType;
   duration: number;
+  usePromise?: UsePromise;
 }
 
 const toasts: Writable<Toast[]> = writable([]);

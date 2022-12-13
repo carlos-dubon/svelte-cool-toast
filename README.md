@@ -5,6 +5,14 @@
 </p>
 
 <div align="center">
+  <video
+    src=".github/readme/svelte-cool-toast-demo.mp4"
+    autoplay
+    loop
+  ></video>
+</div>
+
+<div align="center">
   <a
     href="https://svelte.dev/repl/46c3c3c8943e4752a380ce019fb99739?version=3.49.0"
   >
@@ -43,10 +51,6 @@
 - 🎨 Easily themable
 - 📱 Mobile friendly
 
-## 📸 Screenshots
-
-![Screenshots](.github/readme/examples.png)
-
 ## 🔑 License
 
 [MIT](./LICENSE)
@@ -83,6 +87,36 @@ Wrap your app with the `ToastProvider` component and then use the `toast` helper
 
 ```
 
+With promises:
+
+```Svelte
+<script>
+  import { ToastProvider, toast } from 'svelte-cool-toast';
+  import "svelte-cool-toast/css/theme.css";
+  import axios from "axios";
+</script>
+
+<ToastProvider placement="bottom-center">
+  <button
+    on:click={() => {
+      toast('Saving data.', {
+        usePromise: {
+          promise: axios.post('/user', {
+            firstName: 'Fred',
+            lastName: 'Flintstone'
+          }),
+          succes: 'Success!'
+          error: 'Something went wrong.',
+        }
+      });
+    }}
+  >
+    Make me a toast
+  </button>
+</ToastProvider>
+
+```
+
 ## 🍱 Custom components
 
 If you want to render a custom content component simply pass the `contentComponent` prop to the `ToastProvider`.
@@ -96,6 +130,9 @@ If you want to render a custom content component simply pass the `contentCompone
   export let title = '';
   export let message = '';
   export let type: ToastType = 'normal';
+  export let usePromise: UsePromise | null = null;
+  export let resolvingPromise = true;
+  export let promiseError = false;
 </script>
 
 <div>

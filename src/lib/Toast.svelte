@@ -4,12 +4,13 @@
   import InformationIcon from './icons/Information.svelte';
   import BanIcon from './icons/Ban.svelte';
   import WarningIcon from './icons/Warning.svelte';
+  import AnimatedLoadingIcon from './icons/AnimatedLoading.svelte';
 
   import { onMount } from 'svelte';
   import type { SvelteComponent } from 'svelte';
   import { wait } from './helpers/wait';
 
-  import type { ToastType } from './toast';
+  import type { ToastType, UsePromise } from './toast';
   import { toasts, placement } from './store';
 
   export let id = '';
@@ -17,6 +18,7 @@
   export let message = 'Toast example';
   export let duration = 2000;
   export let type: ToastType = 'normal';
+  export let usePromise: UsePromise | null = null;
 
   export let contentComponent: typeof SvelteComponent | undefined;
   export let dismissComponent: typeof SvelteComponent | undefined;
@@ -29,7 +31,23 @@
 
   let isHovered = false;
 
+  let resolvingPromise = true;
+  let promiseError = false;
+
   onMount(async () => {
+    if (usePromise) {
+      resolvingPromise = true;
+
+      try {
+        await usePromise.promise;
+      } catch (e) {
+        console.error(e);
+        promiseError = true;
+      }
+
+      resolvingPromise = false;
+    }
+
     await wait(duration);
 
     if (!isHovered) {
@@ -66,7 +84,7 @@
     isHovered = false;
 
     await wait(400);
-    if (!isHovered) {
+    if (!isHovered && !resolvingPromise) {
       visible = false;
     }
   }}
@@ -79,13 +97,24 @@
         props={{
           title,
           message,
-          type
+          type,
+          usePromise,
+          resolvingPromise,
+          promiseError
         }}
       />
     </div>
   {:else}
     <div class="toast-icon">
-      {#if type == 'normal'}
+      {#if usePromise}
+        {#if resolvingPromise}
+          <AnimatedLoadingIcon />
+        {:else if promiseError}
+          <BanIcon />
+        {:else}
+          <CheckmarkIcon />
+        {/if}
+      {:else if type == 'normal'}
         <InformationIcon />
       {:else if type == 'success'}
         <CheckmarkIcon />
@@ -100,7 +129,17 @@
         <p class="toast-title">{title}</p>
       {/if}
       <p class="toast-message">
-        {message}
+        {#if usePromise}
+          {#if resolvingPromise}
+            {message}
+          {:else if promiseError}
+            {usePromise.error}
+          {:else}
+            {usePromise.succes}
+          {/if}
+        {:else}
+          {message}
+        {/if}
       </p>
     </div>
   {/if}

@@ -2,11 +2,17 @@ import { get } from 'svelte/store';
 import { toasts, placement } from './store';
 
 export type ToastType = 'normal' | 'success' | 'warning' | 'error';
+export interface UsePromise {
+  promise: Promise<unknown>;
+  succes: string;
+  error: string;
+}
 
 interface Options {
   title?: string;
   type?: ToastType;
   duration?: number;
+  usePromise?: UsePromise;
 }
 
 const toast = (message: string, options?: Options) => {
@@ -19,7 +25,8 @@ const toast = (message: string, options?: Options) => {
     type: options?.type || 'normal',
     title: options?.title,
     message: message,
-    duration: options?.duration || 3000
+    duration: options?.duration || 3000,
+    usePromise: options?.usePromise
   };
 
   if (get(placement).includes('bottom')) {
