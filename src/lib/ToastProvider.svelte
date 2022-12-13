@@ -26,6 +26,7 @@
         message={toast.message}
         type={toast.type}
         duration={toast.duration}
+        usePromise={toast.usePromise}
       />
     {/each}
   </div>

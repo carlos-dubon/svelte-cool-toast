@@ -2,6 +2,7 @@
   import ToastProvider from '$lib/ToastProvider.svelte';
   import { toast } from '$lib/toast';
   import '$lib/css/theme.css';
+  import { wait } from '$lib/helpers/wait';
 </script>
 
 <ToastProvider placement="bottom-right">
@@ -58,6 +59,20 @@
       }}
     >
       Long text
+    </button>
+
+    <button
+      on:click={() => {
+        toast('Saving data.', {
+          usePromise: {
+            promise: wait(2000),
+            error: 'Something went wrong.',
+            succes: 'Success!'
+          }
+        });
+      }}
+    >
+      Promise
     </button>
   </div>
 </ToastProvider>
