@@ -6,7 +6,7 @@
 
 <div align="center">
   <video
-    src=".github/readme/svelte-cool-toast-demo.mp4"
+    src="https://user-images.githubusercontent.com/69093659/207470903-828d221b-08b7-47df-9cc4-c932142c94a8.mp4"
     autoplay
     loop
   ></video>
