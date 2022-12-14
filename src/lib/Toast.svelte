@@ -135,7 +135,7 @@
           {:else if promiseError}
             {usePromise.error}
           {:else}
-            {usePromise.succes}
+            {usePromise.success}
           {/if}
         {:else}
           {message}

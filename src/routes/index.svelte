@@ -67,7 +67,7 @@
           usePromise: {
             promise: wait(2000),
             error: 'Something went wrong.',
-            succes: 'Success!'
+            success: 'Success!'
           }
         });
       }}
