@@ -105,7 +105,7 @@ With promises:
             firstName: 'Fred',
             lastName: 'Flintstone'
           }),
-          succes: 'Success!'
+          success: 'Success!'
           error: 'Something went wrong.',
         }
       });

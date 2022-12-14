@@ -4,7 +4,7 @@ import { toasts, placement } from './store';
 export type ToastType = 'normal' | 'success' | 'warning' | 'error';
 export interface UsePromise {
   promise: Promise<unknown>;
-  succes: string;
+  success: string;
   error: string;
 }
 
