@@ -2,10 +2,14 @@ import { get } from 'svelte/store';
 import { toasts, placement } from './store';
 
 export type ToastType = 'normal' | 'success' | 'warning' | 'error';
+export interface PromiseAction {
+  message: string;
+  action?: () => Promise<void> | void;
+}
 export interface UsePromise {
   promise: Promise<unknown>;
-  success: string;
-  error: string;
+  success: string | PromiseAction;
+  error: string | PromiseAction;
 }
 
 interface Options {
