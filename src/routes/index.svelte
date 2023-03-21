@@ -67,7 +67,16 @@
           usePromise: {
             promise: wait(2000),
             error: 'Something went wrong.',
-            success: 'Success!'
+            success: {
+              message: 'Success!',
+              action: () => {
+                setTimeout(() => {
+                  toast('Success from success action!', {
+                    type: 'success'
+                  });
+                }, 1000);
+              }
+            }
           }
         });
       }}

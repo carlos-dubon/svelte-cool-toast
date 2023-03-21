@@ -109,6 +109,29 @@ With promises:
           error: 'Something went wrong.',
         }
       });
+
+      //or
+
+      toast('Saving data.', {
+        promise: axios.post('/user', {
+          firstName: 'Fred',
+          lastName: 'Flintstone'
+        }),
+        success: {
+          message: 'Success',
+          //optionally:
+          action: () => {
+            // This will execute when promise finished with success state
+          }
+        },
+        error: {
+          message: 'Something went wrong',
+          //optionally:
+          action: () => {
+            // This will execute when promise finished with error state
+          }
+        }
+      })
     }}
   >
     Make me a toast

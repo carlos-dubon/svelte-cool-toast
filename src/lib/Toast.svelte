@@ -40,8 +40,14 @@
 
       try {
         await usePromise.promise;
+        if (typeof usePromise.success != 'string' && usePromise.success.action) {
+          await usePromise.success.action();
+        }
       } catch (e) {
         console.error(e);
+        if (typeof usePromise.error != 'string' && usePromise.error.action) {
+          await usePromise.error.action();
+        }
         promiseError = true;
       }
 
@@ -133,9 +139,15 @@
           {#if resolvingPromise}
             {message}
           {:else if promiseError}
-            {usePromise.error}
-          {:else}
+            {#if typeof usePromise.error == 'string'}
+              {usePromise.error}
+            {:else}
+              {usePromise.error.message}
+            {/if}
+          {:else if typeof usePromise.success == 'string'}
             {usePromise.success}
+          {:else}
+            {usePromise.success.message}
           {/if}
         {:else}
           {message}
